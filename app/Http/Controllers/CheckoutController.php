@@ -14,7 +14,9 @@ class CheckoutController extends Controller
      */
     public function index()
     {
-        //
+        return view('checkouts.index', [
+            'checkouts' => Checkout::all()
+        ]);
     }
 
     /**
@@ -46,7 +48,9 @@ class CheckoutController extends Controller
      */
     public function show(Checkout $checkout)
     {
-        //
+        return view('checkouts.show', [
+            'checkout' => $checkout
+        ]);
     }
 
     /**

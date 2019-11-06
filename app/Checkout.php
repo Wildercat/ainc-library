@@ -15,4 +15,8 @@ class Checkout extends Model
     {
         return $this->belongsTo(Book::class);
     }
+
+    public function path() {
+        return route('checkouts.show', $this);
+    }
 }

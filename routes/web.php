@@ -14,10 +14,16 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Book
 Route::post('/books', 'BookController@store');
 Route::get('/books', 'BookController@index');
 Route::get('/books/create', 'BookController@create');
 Route::get('/books/{book}', 'BookController@show')->name('books.show');
+
+//Checkout
+Route::get('/checkouts', 'CheckoutController@index');
+Route::get('/checkouts/{checkout}', 'CheckoutController@show')->name('checkouts.show');
 
 Auth::routes();
 
