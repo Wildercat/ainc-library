@@ -14,7 +14,9 @@ class BookController extends Controller
      */
     public function index()
     {
-        //
+        return view('books/books', [
+            'books' => Book::all()
+        ]);
     }
 
     /**
@@ -44,9 +46,11 @@ class BookController extends Controller
      * @param  \App\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function show(Book $book)
+    public function show($bookId)
     {
-        //
+        return view('books/show', [
+            'book' => Book::find($bookId)
+        ]);
     }
 
     /**
