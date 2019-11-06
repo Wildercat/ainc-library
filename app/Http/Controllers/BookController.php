@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Book;
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr\PostDec;
 
 class BookController extends Controller
 {
@@ -27,7 +28,9 @@ class BookController extends Controller
      */
     public function create()
     {
-        return (Auth::user()->admin) ? view('books/create') : view('home');
+        $this->authorize('create', Book::class);
+
+        return view('books.create');
     }
 
     /**
@@ -38,11 +41,11 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        if (Auth::user()->admin) {
-            Book::create(request()->validate([
-                'title' => 'required'
-            ]));
-        }
+        $this->authorize('create', Book::class);
+        Book::create(request()->validate([
+            'title' => 'required'
+        ]));
+
 
         return redirect('/books');
     }
@@ -93,5 +96,4 @@ class BookController extends Controller
     {
         //
     }
-
 }

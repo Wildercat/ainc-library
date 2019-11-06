@@ -6,9 +6,7 @@
         @foreach ($books as $book)
         <div class="col-8 py-2">
             <div class="box">
-                <div class="image fit">
-                    <img src="images/pic02.jpg" alt="" />
-                </div>
+                
                 <div class="content">
                     <header class="align-center">
                         <h2>{{$book->title}}</h2>
