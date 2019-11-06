@@ -8,6 +8,10 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+    public function checkouts()
+    {
+        return $this->hasMany(Checkout::class);
+    }
     use Notifiable;
 
     /**
