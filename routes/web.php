@@ -14,9 +14,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::post('/books', 'BookController@store');
 Route::get('/books', 'BookController@index');
-Route::get('/books/{book}', 'BookController@show');
+Route::get('/books/create', 'BookController@create');
+Route::get('/books/{book}', 'BookController@show')->name('books.show');
 
 Auth::routes();
 

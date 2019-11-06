@@ -10,4 +10,11 @@ class Book extends Model
     {
         return $this->hasOne(Checkout::class);
     }
+
+    public function path()
+    {
+        return route('books.show', $this);
+    }
+
+    protected $guarded = [];
 }

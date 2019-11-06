@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use App\Book;
 use Illuminate\Http\Request;
 
@@ -26,7 +27,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+        return (Auth::user()->admin) ? view('books/create') : view('home');
     }
 
     /**
@@ -37,7 +38,13 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (Auth::user()->admin) {
+            Book::create(request()->validate([
+                'title' => 'required'
+            ]));
+        }
+
+        return redirect('/books');
     }
 
     /**
@@ -46,10 +53,10 @@ class BookController extends Controller
      * @param  \App\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function show($bookId)
+    public function show(Book $book)
     {
         return view('books/show', [
-            'book' => Book::find($bookId)
+            'book' => $book
         ]);
     }
 
@@ -86,4 +93,5 @@ class BookController extends Controller
     {
         //
     }
+
 }
