@@ -15,6 +15,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
+// User
+Route::get('/users', 'UserController@index');
+Route::get('/users/{user}', 'UserController@show')->name('users.show');
+
 
 // Book
 Route::post('/books', 'BookController@store');

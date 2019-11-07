@@ -12,6 +12,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(Checkout::class);
     }
+    
+    public function path()
+    {
+        return route('users.show', $this);
+    }
     use Notifiable;
 
     /**

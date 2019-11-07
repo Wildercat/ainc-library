@@ -15,14 +15,14 @@
                     </div>
                     <div class="row">
                         <div class="col">
-                            <a href="{{$book->checkout}}" class="btn btn-secondary">More..</a>
+                            <a href="{{$book->path()}}" class="btn btn-secondary">More..</a>
                         </div>
 
                         <div class="col">
                             @if ($book->checkout)
 
                             <span> Checked out by:</span>
-                            <a href="{{$book->checkout->path()}}"
+                            <a href="{{$book->checkout->user->path()}}"
                                 class="btn btn-primary">{{$book->checkout->user->name}}</a>
 
                             @else
