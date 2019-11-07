@@ -6,13 +6,37 @@
         @foreach ($books as $book)
         <div class="col-8 py-2">
             <div class="box">
-                
+
                 <div class="content">
-                    <header class="align-center">
-                        <h2>{{$book->title}}</h2>
-                    </header>
-                    <div class="align-center">
-                        <a href="{{$book->path()}}" class="btn btn-secondary">More..</a>
+                    <div class="row">
+                        <header class="align-center">
+                            <h2>{{$book->title}}</h2>
+                        </header>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <a href="{{$book->checkout}}" class="btn btn-secondary">More..</a>
+                        </div>
+
+                        <div class="col">
+                            @if ($book->checkout)
+
+                            <span> Checked out by:</span>
+                            <a href="{{$book->checkout->path()}}"
+                                class="btn btn-primary">{{$book->checkout->user->name}}</a>
+
+                            @else
+
+                            <span>In Stock</span>
+                            <form method="POST" action="/checkouts">
+                                @csrf
+                            <input name="book_id" type="hidden" value="{{$book->id}}">
+                                <button type="submit" class="btn btn-primary">Checkout</button>
+                            </form>
+
+                            @endif
+                        </div>
+
                     </div>
                 </div>
             </div>
