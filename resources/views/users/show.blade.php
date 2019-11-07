@@ -11,9 +11,17 @@
                 </header>
                 <h3>Books Checked Out:</h3>
                 <ul>
-                @foreach ($user->checkouts as $checkout)
-                <li><a href="{{$checkout->book->path()}}">{{$checkout->book->title}}</a></li>
-                @endforeach
+                    @foreach ($user->checkouts as $checkout)
+                    <li>
+                        <a href="{{$checkout->book->path()}}">{{$checkout->book->title}}</a>
+                        <form method="POST" action="/checkouts/{{$checkout->id}}">
+                            @csrf
+                            @method('DELETE')
+                            <input name="checkout_id" type="hidden" value="{{$checkout->id}}">
+                            <button type="submit" class="btn btn-success">Return</button>
+                        </form>
+                    </li>
+                    @endforeach
                 </ul>
             </div>
         </div>

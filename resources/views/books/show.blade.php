@@ -22,6 +22,15 @@
                             <a href="{{$book->checkout->user->path()}}"
                                 class="btn btn-primary">{{$book->checkout->user->name}}</a>
 
+                            @if (Auth::user()->can('delete', $book->checkout))
+                            <form method="POST" action="/checkouts/{{$book->checkout->id}}">
+                                @csrf
+                                @method('DELETE')
+                                <input name="checkout_id" type="hidden" value="{{$book->checkout->id}}">
+                                <button type="submit" class="btn btn-success">Return</button>
+                            </form>
+
+                            @endif
                             @else
 
                             <span>In Stock</span>
@@ -30,6 +39,7 @@
                                 <input name="book_id" type="hidden" value="{{$book->id}}">
                                 <button type="submit" class="btn btn-primary">Checkout</button>
                             </form>
+
 
                             @endif
 
