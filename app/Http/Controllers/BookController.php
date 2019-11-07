@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use App\Book;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use PhpParser\Node\Expr\PostDec;
 
@@ -26,11 +27,29 @@ class BookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function search()
     {
         $this->authorize('create', Book::class);
+        return view('books.search');
+    }
+    public function create()
+    {
 
-        return view('books.create');
+        $this->authorize('create', Book::class);
+        $query = request('query');
+        // dd($query);
+        $key = 'AIzaSyDOMCugilpoZ7cZ-fnEXgZlr7D3elWQFC0';
+        // $client = new Client([
+        //     'base_uri' => 'https://www.googleapis.com/books/v1/volumes'
+        // ]);
+        $client = new Client;
+        $response = $client->get('https://www.googleapis.com/books/v1/volumes?q='.$query.'&key='.$key);
+        // dd(json_decode($response->getBody()->getContents())->items);
+        $results = json_decode($response->getBody()->getContents())->items;
+        
+        return view('books.create', [
+            'results' => $results
+        ]);
     }
 
     /**

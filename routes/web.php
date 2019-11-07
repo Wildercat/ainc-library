@@ -24,7 +24,8 @@ Route::get('/users/{user}', 'UserController@show')->name('users.show');
 Route::delete('/books/{book}', 'BookController@destroy');
 Route::post('/books', 'BookController@store');
 Route::get('/books', 'BookController@index');
-Route::get('/books/create', 'BookController@create');
+Route::post('/books/create', 'BookController@create');
+Route::get('/books/create', 'BookController@search');
 Route::get('/books/{book}', 'BookController@show')->name('books.show');
 
 //Checkout
