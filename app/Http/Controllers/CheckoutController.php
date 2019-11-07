@@ -99,6 +99,9 @@ class CheckoutController extends Controller
      */
     public function destroy(Checkout $checkout)
     {
-        //
+        $user_path = $checkout->path();
+        $checkout->delete();
+
+        return redirect($user_path);
     }
 }

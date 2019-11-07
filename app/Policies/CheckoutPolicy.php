@@ -65,7 +65,7 @@ class CheckoutPolicy
      */
     public function delete(User $user, Checkout $checkout)
     {
-        //
+        return $user->admin ?: $user->id == $checkout->user_id;
     }
 
     /**
