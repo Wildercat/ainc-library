@@ -11,6 +11,7 @@
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -22,6 +23,7 @@ Route::get('/books/create', 'BookController@create');
 Route::get('/books/{book}', 'BookController@show')->name('books.show');
 
 //Checkout
+Route::post('/checkouts', 'CheckoutController@store');
 Route::get('/checkouts', 'CheckoutController@index');
 Route::get('/checkouts/{checkout}', 'CheckoutController@show')->name('checkouts.show');
 
