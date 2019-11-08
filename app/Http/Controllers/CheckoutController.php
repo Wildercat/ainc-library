@@ -15,6 +15,7 @@ class CheckoutController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny', Checkout::class);
         return view('checkouts.index', [
             'checkouts' => Checkout::all()
         ]);
@@ -98,7 +99,8 @@ class CheckoutController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Checkout $checkout)
-    {
+    {   
+        $this->authorize('delete', $checkout);
         $user_path = $checkout->user->path();
         $checkout->delete();
 

@@ -18,7 +18,7 @@ class CheckoutPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return $user->admin;
     }
 
     /**
